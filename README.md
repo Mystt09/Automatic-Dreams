@@ -110,24 +110,24 @@ Once the sensor reads what the angle is, the bot will stop when that angle is re
 
 The gyro sensor still needs some testing and work. At this moment, it will not display the current angle in the output, nor will it stop when it reaches 90 degrees. 
 
-SensorPort = 1; [2;36m% has to be a number between 1 and 4 [0m
+SensorPort = 1; % has to be a number between 1 and 4 [0m
 
-brick.GyroCalibrate(SensorPort); [2;36m% Calibrates the Gyro Sensor.[0m
+brick.GyroCalibrate(SensorPort); % Calibrates the Gyro Sensor.[0m
 
-angle = brick.GyroAngle(1); [2;36m % Get the current Gyro angle[0m
+angle = brick.GyroAngle(1);  % Get the current Gyro angle[0m
 display(angle); [2;36m% Print angle.
 [0m
-angleRate = brick.GyroRate(SensorPort); [2;36m% Get the current Gyro angle rate[0m
+angleRate = brick.GyroRate(SensorPort); % Get the current Gyro angle rate[0m
 
-display(angleRate); [2;35m[2;36m% Print angle.[0m[2;35m[0m
+display(angleRate); % Print angle
 
-[2;36m% when the bot is going straight, then it should keep going straight
+% when the bot is going straight, then it should keep going straight
 % if there a change in the angle, then recalibrate to go keep going
-% straight [0m
+% straight
 
-[2;36m % Change in the angle, pos or neg from 0 when going straight [0m
+% Change in the angle, pos or neg from 0 when going straight [0m
 
-[2;36m %if the angle reads 80 degrees, then stop[0m
+%if the angle reads 80 degrees, then stop[0m
 
 if angle == 80
 
