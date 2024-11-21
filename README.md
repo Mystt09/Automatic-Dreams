@@ -119,6 +119,9 @@ display(angle); [2;36m% Print angle.
 [0m
 angleRate = brick.GyroRate(SensorPort); % Get the current Gyro angle rate[0m
 
+if angle == 80
+
+    brick.StopMotor([LEFT_WHEEL, RIGHT_WHEEL], 'Brake');
 display(angleRate); % Print angle
 
 % when the bot is going straight, then it should keep going straight
@@ -129,9 +132,28 @@ display(angleRate); % Print angle
 
 %if the angle reads 80 degrees, then stop[0m
 
-if angle == 80
+# Main loop
 
-    brick.StopMotor([LEFT_WHEEL, RIGHT_WHEEL], 'Brake');
+lifted = false;
+while true
+    pause(0.1);
+
+    % Kill switch
+    if key == 'q'
+        brick.StopAllMotors();
+        DisconnectBrick(brick);
+        break;
+    end
+
+    moveForward(brick, LEFT_WHEEL, RIGHT_WHEEL, FORWARD_POWER, MOTOR_POWER_DIFFERENCE);
+    %handleTouchSensor(brick, TOUCH_SENSOR_PORT, GYRO_SENSOR_PORT, LEFT_WHEEL, RIGHT_WHEEL, STEER_POWER, MOTOR_POWER_DIFFERENCE);
+    %handleColorSensor(brick, COLOR_SENSOR_PORT, BLUE, GREEN, YELLOW, RED, key, LEFT_WHEEL, RIGHT_WHEEL, FORWARD_POWER, MOTOR_POWER_DIFFERENCE, STEER_POWER, FORK_LIFT, LIFT_SPEED, LIFT_MAX_ANGLE, lifted);
+    handleUltrasonicSensor(brick, ULTRASONIC_SENSOR_PORT, GYRO_SENSOR_PORT, DISTANCE_THRESHOLD, LEFT_WHEEL, RIGHT_WHEEL, FORWARD_POWER, STEER_POWER, MOTOR_POWER_DIFFERENCE);
+end
+
+CloseKeyboard();
+
+
 
 end
 
