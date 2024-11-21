@@ -110,14 +110,14 @@ Once the sensor reads what the angle is, the bot will stop when that angle is re
 
 The gyro sensor still needs some testing and work. At this moment, it will not display the current angle in the output, nor will it stop when it reaches 90 degrees. 
 
-SensorPort = 1; % has to be a number between 1 and 4 [0m
+SensorPort = 1; % has to be a number between 1 and 4
 
-brick.GyroCalibrate(SensorPort); % Calibrates the Gyro Sensor.[0m
+brick.GyroCalibrate(SensorPort); % Calibrates the Gyro Sensor.
 
-angle = brick.GyroAngle(1);  % Get the current Gyro angle[0m
-display(angle); [2;36m% Print angle.
-[0m
-angleRate = brick.GyroRate(SensorPort); % Get the current Gyro angle rate[0m
+angle = brick.GyroAngle(1);  % Get the current Gyro angle
+display(angle); % Print angle.
+
+angleRate = brick.GyroRate(SensorPort); % Get the current Gyro angle 
 
 if angle == 80
 
@@ -128,13 +128,13 @@ display(angleRate); % Print angle
 % if there a change in the angle, then recalibrate to go keep going
 % straight
 
-% Change in the angle, pos or neg from 0 when going straight [0m
+% Change in the angle, pos or neg from 0 when going straight 
 
 %if the angle reads 80 degrees, then stop[0m
 
 # Main loop
 
-lifted = false;
+
 while true
     pause(0.1);
 
@@ -146,15 +146,17 @@ while true
     end
 
     moveForward(brick, LEFT_WHEEL, RIGHT_WHEEL, FORWARD_POWER, MOTOR_POWER_DIFFERENCE);
+    
     %handleTouchSensor(brick, TOUCH_SENSOR_PORT, GYRO_SENSOR_PORT, LEFT_WHEEL, RIGHT_WHEEL, STEER_POWER, MOTOR_POWER_DIFFERENCE);
+    
     %handleColorSensor(brick, COLOR_SENSOR_PORT, BLUE, GREEN, YELLOW, RED, key, LEFT_WHEEL, RIGHT_WHEEL, FORWARD_POWER, MOTOR_POWER_DIFFERENCE, STEER_POWER, FORK_LIFT, LIFT_SPEED, LIFT_MAX_ANGLE, lifted);
+    
     handleUltrasonicSensor(brick, ULTRASONIC_SENSOR_PORT, GYRO_SENSOR_PORT, DISTANCE_THRESHOLD, LEFT_WHEEL, RIGHT_WHEEL, FORWARD_POWER, STEER_POWER, MOTOR_POWER_DIFFERENCE);
+    
 end
-
 CloseKeyboard();
-
-
-
 end
+
+
 
 
