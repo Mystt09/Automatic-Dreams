@@ -101,7 +101,30 @@ initialSpeedC = 20;
 brick.MoveMotor('B', initialSpeedB);
 brick.MoveMotor('C', initialSpeedC);
 
+# Touch Sensor 
 
+*** the touch sensor helps with navigating through the walls 
+
+function handleTouchSensor(brick, TOUCH_SENSOR_PORT, GYRO_SENSOR_PORT, LEFT_WHEEL, RIGHT_WHEEL, STEER_POWER, FORWARD_POWER, MOTOR_POWER_DIFFERENCE)
+    touch = brick.TouchPressed(TOUCH_SENSOR_PORT);
+    prevAngle = brick.GyroAngle(GYRO_SENSOR_PORT);
+    currAngle = 0;
+
+    if touch
+        stopMotors(brick, LEFT_WHEEL, RIGHT_WHEEL);
+        moveBackward(brick, LEFT_WHEEL, RIGHT_WHEEL, FORWARD_POWER, MOTOR_POWER_DIFFERENCE);
+        pause(0.5);
+       %brick.MoveMotor()
+        %moveBackward(brick, LEFT_WHEEL, RIGHT_WHEEL, FORWARD_POWER, MOTOR_POWER_DIFFERENCE); % move backwards if the touch sensor is pushed, then turn left in the while loop 
+       % pause(1);
+        while currAngle < 75
+            turnLeft(brick, LEFT_WHEEL, RIGHT_WHEEL, STEER_POWER, MOTOR_POWER_DIFFERENCE);
+            %pause(0.2);
+            currAngle = prevAngle - brick.GyroAngle(GYRO_SENSOR_PORT);
+        end
+        %brick.GyroCalibrate(GYRO_SENSOR_PORT);
+    end
+end
 
 # Gyro sensor
 
